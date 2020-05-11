@@ -8,7 +8,7 @@ public class DragAndRotating : MonoBehaviour, IBeginDragHandler, IEndDragHandler
   public bool Movable = true;
   bool isMoving;
   Rigidbody2D rb;
-
+  GameHandler gameHandler;
 
   // нужны чтобы работал костыльный инвентарь
   public void OnBeginDrag(PointerEventData eventData) { }
@@ -20,12 +20,13 @@ public class DragAndRotating : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 
   void Start()
   {
+    gameHandler = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameHandler>();
     rb = GetComponent<Rigidbody2D>();
   }
 
   void Update()
   {
-    if (!Movable)
+    if (!Movable || gameHandler.IsSimulated())
     {
       return;
     }

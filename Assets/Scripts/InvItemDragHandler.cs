@@ -5,11 +5,7 @@ using UnityEngine.EventSystems;
 
 public class InvItemDragHandler : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
-  public static GameObject itemBeingDragged;
-
   public GameObject gameItem;
-
-  Vector3 startPosition;
 
   void IBeginDragHandler.OnBeginDrag(PointerEventData eventData)
   {

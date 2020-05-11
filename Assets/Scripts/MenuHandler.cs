@@ -1,13 +1,21 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MenuHandler : MonoBehaviour
 {
 
-  public void Play()
+  Text levelNumberText;
+  LevelHandler levelHandler;
+
+  void Start()
   {
-    //сделать выбор уровня и загрузку этого уровня
-    SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
+    levelHandler = GameObject.FindWithTag("LevelController").GetComponent<LevelHandler>();
+    levelNumberText = GameObject.Find("LevelNumberText").GetComponent<Text>();
+  }
+
+  void Update()
+  {
+    levelNumberText.text = levelHandler.getCurrentLevel().ToString();
   }
 
   public void Exit() { Application.Quit(); }
