@@ -12,7 +12,6 @@ public class Finish : MonoBehaviour
 
   void Start()
   {
-    Debug.Log("FISIN");
     gameHandler = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameHandler>();
     cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
     rb = GetComponent<Rigidbody2D>();
@@ -26,7 +25,6 @@ public class Finish : MonoBehaviour
       {
         gameHandler.Win();
       }
-      Debug.Log("trigger");
     }
   }
 

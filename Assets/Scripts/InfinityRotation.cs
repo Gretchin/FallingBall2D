@@ -6,6 +6,6 @@ public class InfinityRotation : MonoBehaviour
 {
   void Update()
   {
-    transform.Rotate(new Vector3(0, 0, -1));
+    transform.Rotate(Vector3.back);
   }
 }

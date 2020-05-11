@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
+public class DragAndRotating : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
   public GameObject invItem;
 
@@ -9,26 +9,13 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
   bool isMoving;
   Rigidbody2D rb;
 
-  public void OnBeginDrag(PointerEventData eventData)
-  {
-    Debug.Log("drag");
-    // throw new System.NotImplementedException();
-  }
 
-  public void OnDrag(PointerEventData eventData)
-  {
-    Debug.Log("dragsss");
-  }
+  // нужны чтобы работал костыльный инвентарь
+  public void OnBeginDrag(PointerEventData eventData) { }
+  public void OnDrag(PointerEventData eventData) { }
+  public void OnEndDrag(PointerEventData eventData) { }
 
-  public void OnEndDrag(PointerEventData eventData)
-  {
-    Debug.Log("dragEnd");
-  }
-
-  public void SetIsMoving(bool isMoving)
-  {
-    this.isMoving = isMoving;
-  }
+  public void SetIsMoving(bool isMoving) { this.isMoving = isMoving; }
 
 
   void Start()

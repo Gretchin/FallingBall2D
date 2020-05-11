@@ -72,6 +72,5 @@ public class GameHandler : MonoBehaviour
     {
       loseText.SetActive(false);
     }
-    Debug.Log("GameHandler.Start");
   }
 }
