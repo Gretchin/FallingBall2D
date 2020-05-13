@@ -19,6 +19,17 @@ public class GameHandler : MonoBehaviour
     return isSimulated;
   }
 
+  private void ChangeSimulationState(bool newState)
+  {
+    isSimulated = newState;
+    player.GetComponent<Rigidbody2D>().simulated = newState;
+    GameObject buttonComponent = GameObject.FindWithTag("PlayButton");
+    if (buttonComponent != null)
+    {
+      buttonComponent.GetComponent<Button>().interactable = !newState;
+    }
+  }
+
   void Start()
   {
     levelHandler = GameObject.FindWithTag("LevelController").GetComponent<LevelHandler>();
@@ -48,8 +59,7 @@ public class GameHandler : MonoBehaviour
         loseText.SetActive(false);
       }
       player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-      isSimulated = true;
-      player.GetComponent<Rigidbody2D>().simulated = isSimulated;
+      ChangeSimulationState(true);
     }
     // нужно запретить перетаскивание
   }
@@ -69,8 +79,7 @@ public class GameHandler : MonoBehaviour
   {
     if (player != null)
     {
-      isSimulated = false;
-      player.GetComponent<Rigidbody2D>().simulated = isSimulated;
+      ChangeSimulationState(false);
     }
 
     if (levelHandler.currentLevelIsLast())
@@ -90,8 +99,7 @@ public class GameHandler : MonoBehaviour
     {
       loseText.SetActive(true);
     }
-    isSimulated = false;
-    player.GetComponent<Rigidbody2D>().simulated = isSimulated;
+    ChangeSimulationState(false);
     player.transform.SetPositionAndRotation(playerPosition, Quaternion.identity);
   }
 }
