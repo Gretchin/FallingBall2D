@@ -15,6 +15,7 @@ public class MenuHandler : MonoBehaviour
 
   void Update()
   {
+    if (Input.GetKeyDown(KeyCode.Escape)) { Exit(); }
     levelNumberText.text = levelHandler.getCurrentLevel().ToString();
   }
 
