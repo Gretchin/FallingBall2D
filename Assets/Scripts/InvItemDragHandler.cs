@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class InvItemDragHandler : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
@@ -9,7 +7,9 @@ public class InvItemDragHandler : MonoBehaviour, IDragHandler, IBeginDragHandler
 
   void IBeginDragHandler.OnBeginDrag(PointerEventData eventData)
   {
-    GameObject newItem = Instantiate(gameItem);
+    // Vector2 чтобы обнулить координату z
+    Vector2 newGameItemPosition = Camera.main.ScreenToWorldPoint(gameObject.transform.position);
+    GameObject newItem = Instantiate(gameItem, newGameItemPosition, Quaternion.identity);
     newItem.GetComponent<DragAndRotating>().SetIsMoving(true);
     Destroy(gameObject);
   }

@@ -10,7 +10,10 @@ public class ItemDropHandler : MonoBehaviour, IDropHandler
     GameObject slotItem = eventData.pointerEnter;
     if (gameItem && slotItem.transform.tag == "Slot")
     {
-      GameObject invItem = gameItem.GetComponent<DragAndRotating>().invItem;
+      GameObject invItem = gameItem.tag == "InventaryItem"
+        ? gameItem
+        : gameItem.GetComponent<DragAndRotating>().invItem;
+        
       if (invItem)
       {
         GameObject newInvItem = Instantiate(invItem);
