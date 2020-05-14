@@ -7,6 +7,10 @@ TagManager:
   - Slot
   - LevelController
   - PlayButton
+  - InventaryItem
+  - GameOver
+  - NextLevelButton
+  - LevelNumberText
   layers:
   - Default
   - TransparentFX

@@ -8,7 +8,7 @@ public class GameHandler : MonoBehaviour
   Vector3 playerPosition;
 
   GameObject nextLevelButton;
-  GameObject loseText;
+  GameObject gameOverUiElement;
 
   LevelHandler levelHandler;
 
@@ -36,16 +36,16 @@ public class GameHandler : MonoBehaviour
     player = GameObject.FindGameObjectWithTag("Player");
     playerPosition = player.transform.position;
 
-    nextLevelButton = GameObject.Find("NextLevelButton");
+    nextLevelButton = GameObject.FindWithTag("NextLevelButton");
     if (nextLevelButton != null)
     {
       nextLevelButton.SetActive(false);
     }
 
-    loseText = GameObject.Find("LoseText");
-    if (loseText != null)
+    gameOverUiElement = GameObject.FindWithTag("GameOver");
+    if (gameOverUiElement != null)
     {
-      loseText.SetActive(false);
+      gameOverUiElement.SetActive(false);
     }
   }
 
@@ -54,9 +54,9 @@ public class GameHandler : MonoBehaviour
     if (player != null && !isSimulated)
     {
 
-      if (loseText != null)
+      if (gameOverUiElement != null)
       {
-        loseText.SetActive(false);
+        gameOverUiElement.SetActive(false);
       }
       player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
       ChangeSimulationState(true);
@@ -84,8 +84,8 @@ public class GameHandler : MonoBehaviour
 
     if (levelHandler.currentLevelIsLast())
     {
-      loseText.GetComponent<Text>().text = "Ура! Все вирусы побеждены, теперь ЛШ точно состоится =)";
-      loseText.SetActive(true);
+      gameOverUiElement.GetComponentInChildren<Text>().text = "Ура! Все вирусы побеждены, теперь ЛШ точно состоится =)";
+      gameOverUiElement.SetActive(true);
     }
     else if (nextLevelButton != null)
     {
@@ -95,9 +95,9 @@ public class GameHandler : MonoBehaviour
   }
   public void Lose()
   {
-    if (loseText != null)
+    if (gameOverUiElement != null)
     {
-      loseText.SetActive(true);
+      gameOverUiElement.SetActive(true);
     }
     ChangeSimulationState(false);
     player.transform.SetPositionAndRotation(playerPosition, Quaternion.identity);

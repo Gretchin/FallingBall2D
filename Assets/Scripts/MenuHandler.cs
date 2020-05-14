@@ -10,7 +10,7 @@ public class MenuHandler : MonoBehaviour
   void Start()
   {
     levelHandler = GameObject.FindWithTag("LevelController").GetComponent<LevelHandler>();
-    levelNumberText = GameObject.Find("LevelNumberText").GetComponent<Text>();
+    levelNumberText = GameObject.FindWithTag("LevelNumberText").GetComponent<Text>();
   }
 
   void Update()
