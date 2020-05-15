@@ -22,15 +22,8 @@ public class LevelHandler : MonoBehaviour
   }
 
 
-  public int getCurrentLevel()
-  {
-    return currentLevel;
-  }
-  public bool currentLevelIsLast()
-  {
-    return currentLevel == MaxReachableLevel;
-  }
-
+  public int getCurrentLevel() { return currentLevel; }
+  public bool currentLevelIsLast() { return currentLevel == MaxReachableLevel; }
   public void LevelPlus() { UpdateCurrentLevel(currentLevel + 1); }
   public void LevelMinus() { UpdateCurrentLevel(currentLevel - 1); }
 
@@ -42,10 +35,7 @@ public class LevelHandler : MonoBehaviour
     }
   }
 
-  public void IncreaseMaxLevel()
-  {
-    UpdateMaxLevel(currentLevel + 1);
-  }
+  public void IncreaseMaxLevel() { UpdateMaxLevel(currentLevel + 1); }
 
   public void UpdateMaxLevel(int newMaxLevel)
   {

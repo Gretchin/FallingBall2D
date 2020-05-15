@@ -1,9 +1,8 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class Finish : MonoBehaviour
+public class PlayerHandler : MonoBehaviour
 {
-  Rigidbody2D rb;
   GameHandler gameHandler;
   Vector3 prevPos;
   int numberOfFramesPlayerDontMove = 0;
@@ -12,18 +11,14 @@ public class Finish : MonoBehaviour
   void Start()
   {
     gameHandler = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameHandler>();
-    rb = GetComponent<Rigidbody2D>();
   }
 
   private void OnTriggerEnter2D(Collider2D other)
   {
     if (other.gameObject.tag == "Finish")
     {
-      if (gameHandler)
-      {
-        gameHandler.Win();
-        StartCoroutine(SlowScale(other.gameObject.transform.position));
-      }
+      gameHandler?.Win();
+      StartCoroutine(SlowScale(other.gameObject.transform.position));
     }
   }
 
@@ -47,7 +42,12 @@ public class Finish : MonoBehaviour
       }
     }
     prevPos = point;
-    if (point.y < 0f || point.y > 1f || point.x > 1f || point.x < 0f || numberOfFramesPlayerDontMove > maxNumberOfFramesToLose)
+    if (point.y < 0f ||
+        point.y > 1f ||
+        point.x < 0f ||
+        point.x > 1f ||
+        numberOfFramesPlayerDontMove > maxNumberOfFramesToLose
+       )
     {
       numberOfFramesPlayerDontMove = 0;
       gameHandler.Lose();

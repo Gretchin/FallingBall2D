@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class GameHandler : MonoBehaviour
 {
   GameObject player;
-  Vector3 playerPosition;
+  Vector3 startPlayerPosition;
 
   GameObject nextLevelButton;
   GameObject gameOverUiElement;
@@ -34,19 +34,13 @@ public class GameHandler : MonoBehaviour
   {
     levelHandler = GameObject.FindWithTag("LevelController").GetComponent<LevelHandler>();
     player = GameObject.FindGameObjectWithTag("Player");
-    playerPosition = player.transform.position;
+    startPlayerPosition = player.transform.position;
 
     nextLevelButton = GameObject.FindWithTag("NextLevelButton");
-    if (nextLevelButton != null)
-    {
-      nextLevelButton.SetActive(false);
-    }
+    nextLevelButton?.SetActive(false);
 
     gameOverUiElement = GameObject.FindWithTag("GameOver");
-    if (gameOverUiElement != null)
-    {
-      gameOverUiElement.SetActive(false);
-    }
+    gameOverUiElement?.SetActive(false);
   }
 
   void Update()
@@ -69,7 +63,6 @@ public class GameHandler : MonoBehaviour
       player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
       ChangeSimulationState(true);
     }
-    // нужно запретить перетаскивание
   }
 
   public void ResetLevel()
@@ -95,19 +88,16 @@ public class GameHandler : MonoBehaviour
       gameOverUiElement.GetComponentInChildren<Text>().text = "Ура! Все вирусы побеждены, теперь ЛШ точно состоится =)";
       gameOverUiElement.SetActive(true);
     }
-    else if (nextLevelButton != null)
+    else
     {
-      nextLevelButton.SetActive(true);
+      nextLevelButton?.SetActive(true);
     }
     levelHandler.IncreaseMaxLevel();
   }
   public void Lose()
   {
-    if (gameOverUiElement != null)
-    {
-      gameOverUiElement.SetActive(true);
-    }
+    gameOverUiElement?.SetActive(true);
     ChangeSimulationState(false);
-    player.transform.SetPositionAndRotation(playerPosition, Quaternion.identity);
+    player.transform.SetPositionAndRotation(startPlayerPosition, Quaternion.identity);
   }
 }

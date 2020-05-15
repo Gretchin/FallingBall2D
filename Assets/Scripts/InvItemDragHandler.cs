@@ -7,11 +7,14 @@ public class InvItemDragHandler : MonoBehaviour, IDragHandler, IBeginDragHandler
 
   void IBeginDragHandler.OnBeginDrag(PointerEventData eventData)
   {
-    // Vector2 чтобы обнулить координату z
-    Vector2 newGameItemPosition = Camera.main.ScreenToWorldPoint(gameObject.transform.position);
-    GameObject newItem = Instantiate(gameItem, newGameItemPosition, Quaternion.identity);
-    newItem.GetComponent<DragAndRotating>().SetIsMoving(true);
-    Destroy(gameObject);
+    if (gameItem)
+    {
+      // Vector2 чтобы обнулить координату z
+      Vector2 newGameItemPosition = Camera.main.ScreenToWorldPoint(gameObject.transform.position);
+      GameObject newItem = Instantiate(gameItem, newGameItemPosition, Quaternion.identity);
+      newItem.GetComponent<DragAndRotating>()?.SetIsMoving(true);
+      Destroy(gameObject);
+    }
   }
   public void OnDrag(PointerEventData eventData) { }
   public void OnEndDrag(PointerEventData eventData) { }
