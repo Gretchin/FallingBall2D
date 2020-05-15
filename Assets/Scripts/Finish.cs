@@ -5,7 +5,6 @@ public class Finish : MonoBehaviour
 {
   Rigidbody2D rb;
   GameHandler gameHandler;
-  Camera cam;
   Vector3 prevPos;
   int numberOfFramesPlayerDontMove = 0;
   int maxNumberOfFramesToLose = 500;
@@ -13,7 +12,6 @@ public class Finish : MonoBehaviour
   void Start()
   {
     gameHandler = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameHandler>();
-    cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
     rb = GetComponent<Rigidbody2D>();
   }
 
@@ -35,7 +33,7 @@ public class Finish : MonoBehaviour
     {
       return;
     }
-    Vector3 point = cam.WorldToViewportPoint(transform.position);
+    Vector3 point = Camera.main.WorldToViewportPoint(transform.position);
     if (gameHandler.IsSimulated())
     {
       float asd = Vector3.Distance(prevPos, point);
@@ -62,6 +60,7 @@ public class Finish : MonoBehaviour
     {
       transform.localScale = new Vector3(q, q, q);
       transform.position += (position - transform.position) * (1 - q);
+      transform.Rotate(Vector3.back * 10f);
       yield return new WaitForSeconds(.05f);
     }
     Destroy(gameObject);
