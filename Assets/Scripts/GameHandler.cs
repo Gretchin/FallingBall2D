@@ -6,6 +6,7 @@ public class GameHandler : MonoBehaviour
 {
   GameObject player;
   Vector3 startPlayerPosition;
+  Quaternion startPlayerRotation;
 
   GameObject nextLevelButton;
   GameObject gameOverUiElement;
@@ -35,6 +36,7 @@ public class GameHandler : MonoBehaviour
     levelHandler = GameObject.FindWithTag("LevelController").GetComponent<LevelHandler>();
     player = GameObject.FindGameObjectWithTag("Player");
     startPlayerPosition = player.transform.position;
+    startPlayerRotation = player.transform.rotation;
 
     nextLevelButton = GameObject.FindWithTag("NextLevelButton");
     nextLevelButton?.SetActive(false);
@@ -90,6 +92,10 @@ public class GameHandler : MonoBehaviour
   {
     gameOverUiElement?.SetActive(true);
     ChangeSimulationState(false);
-    player.transform.SetPositionAndRotation(startPlayerPosition, Quaternion.identity);
+
+    player.transform.SetPositionAndRotation(startPlayerPosition, startPlayerRotation);
+    Rigidbody2D playerRB = player.GetComponent<Rigidbody2D>();
+    playerRB.velocity -= playerRB.velocity;
+    playerRB.angularVelocity -= playerRB.angularVelocity;
   }
 }
