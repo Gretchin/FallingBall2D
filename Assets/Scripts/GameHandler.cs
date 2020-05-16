@@ -43,14 +43,6 @@ public class GameHandler : MonoBehaviour
     gameOverUiElement?.SetActive(false);
   }
 
-  void Update()
-  {
-    if (Input.GetKeyDown(KeyCode.Escape))
-    {
-      SceneManager.LoadScene("MenuScene", LoadSceneMode.Single);
-    }
-  }
-
   public void StartSimulation()
   {
     if (player != null && !isSimulated)

@@ -12,7 +12,7 @@ public class ItemDropHandler : MonoBehaviour, IDropHandler
     {
       GameObject invItem = gameItem.tag == "InventaryItem"
         ? gameItem
-        : gameItem.GetComponent<DragAndRotating>().invItem;
+        : gameItem.GetComponent<DragAndRotating>()?.invItem;
         
       if (invItem)
       {

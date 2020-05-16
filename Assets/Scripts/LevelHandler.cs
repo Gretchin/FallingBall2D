@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class LevelHandler : MonoBehaviour
 {
-
+  string menuSceneName = "MenuScene";
   string maxLevelKey = "MaxLevel";
 
   public int MaxReachableLevel = 5;
@@ -32,6 +33,12 @@ public class LevelHandler : MonoBehaviour
     if (newCurrentLevel <= maxLevel && newCurrentLevel > 0)
     {
       currentLevel = newCurrentLevel;
+
+      Text levelNumberText = GameObject.FindWithTag("LevelNumberText")?.GetComponent<Text>();
+      if (levelNumberText != null)
+      {
+        levelNumberText.text = newCurrentLevel.ToString();
+      }
     }
   }
 
@@ -60,5 +67,24 @@ public class LevelHandler : MonoBehaviour
   {
     UpdateCurrentLevel(currentLevel + 1);
     Play();
+  }
+
+  void Update()
+  {
+    if (Input.GetKeyDown(KeyCode.Escape))
+    {
+      GoBack();
+    }
+  }
+
+
+  public void GoBack()
+  {
+    if (SceneManager.GetActiveScene().name == menuSceneName)
+    {
+      Application.Quit();
+      return;
+    }
+    SceneManager.LoadScene(menuSceneName, LoadSceneMode.Single);
   }
 }
